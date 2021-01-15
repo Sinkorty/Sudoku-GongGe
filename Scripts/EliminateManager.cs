@@ -5,30 +5,26 @@ using UnityEngine.UI;
 
 public class EliminateManager : MonoBehaviour
 {
-    public Text[] tex_psbNum;
-    public Text tex_absNum;
-    public TileBase[] baseTiles;
+    Text[] tex_psbNum=new Text[9];
+    Text tex_absNum;
+    TileBase[] baseTiles;
     Tilemap tm;
 
     Dictionary<Vector3Int, bool[]> psb_Nums = new Dictionary<Vector3Int, bool[]>();//通过坐标列出格子所有可能的数字
     Dictionary<Vector3Int, int> abs_Num = new Dictionary<Vector3Int, int>(); //通过坐标列出格子的绝对数字
     Dictionary<Vector3Int, bool> isFront = new Dictionary<Vector3Int, bool>();//通过坐标判断格子是否是手动编辑的格子
-    public static Vector3Int[] dires ={
-        Vector3Int.zero,//自身
-        Vector3Int.left,//左
-        Vector3Int.left + Vector3Int.up,//左上
-        Vector3Int.up,//上
-        Vector3Int.up + Vector3Int.right,//右上
-        Vector3Int.right,//右
-        Vector3Int.right + Vector3Int.down,//右下
-        Vector3Int.down,//下
-        Vector3Int.down + Vector3Int.left,//左下
-        };//方向顺序
+    Vector3Int[] dires = new Vector3Int[9];
 
     private void Awake()
     {
         tm = GameObject.Find("Grid/Tilemap").GetComponent<Tilemap>();
-        //添加事件
+        baseTiles = VarsManager.GetVars().baseTiles;
+        dires = VarsManager.GetVars().dires;
+        Transform psbNumList = GameObject.Find("Canvas/Tex_PSB_Num").transform;
+        for (int i = 0; i < psbNumList.childCount; i++)
+            tex_psbNum[i] = psbNumList.GetChild(i).gameObject.GetComponent<Text>();
+        tex_absNum = GameObject.Find("Canvas/Tex_ABS_Num/Tex_Num").GetComponent<Text>();
+
         EventCenter.AddListener(EventDefine.Eliminate, Eliminate);
         InstanceGrid();
         Eliminate();//简化
@@ -36,11 +32,10 @@ public class EliminateManager : MonoBehaviour
 
     private void Update()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //{
         for (int i = 0; i < 9; i++)
             tex_psbNum[i].gameObject.SetActive(false);
         tex_absNum.text = "";
+
         Vector3Int cellPos = GetCellPos();
         if (cellPos != Vector3Int.zero)//返回的不是假坐标
         {
@@ -57,7 +52,6 @@ public class EliminateManager : MonoBehaviour
                 tex_absNum.text = abs_Num[cellPos].ToString();
             }
         }
-        //}
     }
     /// <summary> 初始化所有格子信息 </summary>
     public void InstanceGrid()

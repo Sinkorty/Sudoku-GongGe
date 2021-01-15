@@ -3,14 +3,18 @@ using UnityEngine.Tilemaps;
 
 public class EditGridManager : MonoBehaviour
 {
-    public TileBase[] frontTiles;
+    TileBase[] frontTiles = new TileBase[10];
+    Tilemap tm;
     public GameObject editFinished;
-    public static Tilemap tm;
-    private GameObject[] bgs;
+    GameObject[] bgs;
+    Vector3Int[] dires = new Vector3Int[9];
     private void Awake()
     {
-        tm = transform.GetChild(0).gameObject.GetComponent<Tilemap>();
+        tm = transform.Find("Tilemap").gameObject.GetComponent<Tilemap>();
         bgs = GameObject.FindGameObjectsWithTag("BG");
+        frontTiles = VarsManager.GetVars().frontTiles;
+        //editFinished = GameObject.Find("Canvas/Editing/Btn_EditFinish");
+        dires = VarsManager.GetVars().dires;
     }
     private void Update()
     {
@@ -91,7 +95,7 @@ public class EditGridManager : MonoBehaviour
             }
         //从宫判断
         Vector3Int centrolPos = EliminateManager.GetCentrolPos(cellPos);
-        foreach (Vector3Int dire in EliminateManager.dires)
+        foreach (Vector3Int dire in dires)
         {
             if (centrolPos + dire != cellPos && GetTileNum(centrolPos + dire) == num)
             {

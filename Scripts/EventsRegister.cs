@@ -3,7 +3,6 @@ using UnityEngine.Tilemaps;
 
 public class EventsRegister : MonoBehaviour
 {
-    public TileBase emptyTile;
     private void Awake()
     {
         EventCenter.AddListener(EventDefine.ClearGrid, () =>
@@ -12,7 +11,11 @@ public class EventsRegister : MonoBehaviour
             //将所有格子改为empty格子
             for (int y = 1; y < 10; y++)
                 for (int x = 1; x < 10; x++)
-                    tm.SetTile(new Vector3Int(x, y, 0), emptyTile);
+                    tm.SetTile(new Vector3Int(x, y, 0), VarsManager.GetVars().baseTiles[9]);
+            GameObject[] bgs = GameObject.FindGameObjectsWithTag("BG");
+            foreach (GameObject bg in bgs)
+                bg.GetComponent<SpriteRenderer>().color = new Color(0, 0.7352409f, 1, 1);
+            GameObject.Find("Canvas/Editing/Btn_EditFinish").SetActive(true);
         });
         EventCenter.AddListener(EventDefine.OpenSourceCode, () =>
         {

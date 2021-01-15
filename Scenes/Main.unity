@@ -1471,28 +1471,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f87060ffb8d2e8449e3b9d04ff70e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tex_psbNum:
-  - {fileID: 619482692}
-  - {fileID: 1875271557}
-  - {fileID: 1724474210}
-  - {fileID: 112593094}
-  - {fileID: 1068583710}
-  - {fileID: 184501271}
-  - {fileID: 853693761}
-  - {fileID: 1734704876}
-  - {fileID: 1715721811}
-  tex_absNum: {fileID: 939830820}
-  baseTiles:
-  - {fileID: 11400000, guid: b4a0433cc139c22449b811797f08569e, type: 2}
-  - {fileID: 11400000, guid: 32ab973d4f967434d8cd3fc2a34e10bd, type: 2}
-  - {fileID: 11400000, guid: 21f32c0dab937eb4591a2842bf3e6f5e, type: 2}
-  - {fileID: 11400000, guid: 5ef9a268ce788c14c9894e657c91320c, type: 2}
-  - {fileID: 11400000, guid: 99563511f4d0f9d4bae10772c6ace375, type: 2}
-  - {fileID: 11400000, guid: a9f15b73cd3688042a9ba9e00ad2461e, type: 2}
-  - {fileID: 11400000, guid: 263bf04bd7b48104f84c4a0a7cb13194, type: 2}
-  - {fileID: 11400000, guid: 3f1f49a3b44fd2e4ba0b5b4ea5112a85, type: 2}
-  - {fileID: 11400000, guid: 34780e82ce273e14c9ad5dd2326bf905, type: 2}
-  - {fileID: 11400000, guid: e699773ab4082fd4b99fcfdbddf8b8d7, type: 2}
 --- !u!114 &1077286720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1505,18 +1483,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5450ff4d181ac9e4195ac1dd663fd62c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frontTiles:
-  - {fileID: 11400000, guid: b4a0433cc139c22449b811797f08569e, type: 2}
-  - {fileID: 11400000, guid: d48efb1a012af534fa2aafb1c4399408, type: 2}
-  - {fileID: 11400000, guid: 26720013d77e53447940bb5812cbb338, type: 2}
-  - {fileID: 11400000, guid: e5b08dab5c231c74cbc7512ce362e358, type: 2}
-  - {fileID: 11400000, guid: 1bedb7e8d79621c4491bacc6c2254096, type: 2}
-  - {fileID: 11400000, guid: 94e3720f8c99f4a43af08a87d8eda584, type: 2}
-  - {fileID: 11400000, guid: 588c299d0c11d6f41802ee3aae17146c, type: 2}
-  - {fileID: 11400000, guid: 5b3ae8fac9f5f8346bebd628193b9be6, type: 2}
-  - {fileID: 11400000, guid: ddb50f40279338249ad85d3b7aa296d1, type: 2}
-  - {fileID: 11400000, guid: f2088783c639e0c429c2d167d31e20cc, type: 2}
-  editFinished: {fileID: 1568949372}
 --- !u!1 &1099570949
 GameObject:
   m_ObjectHideFlags: 0
@@ -2098,10 +2064,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1403458564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f185d5cb03c13e049abe1f925e18e200, type: 3}
+  m_Script: {fileID: 11500000, guid: 74621a80862025e4a8d4a5048d73898a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  empty: {fileID: 0}
 --- !u!114 &1403458567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2144,19 +2109,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1403458568}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1403458566}
-        m_TargetAssemblyTypeName: RunGitHub, Assembly-CSharp
-        m_MethodName: RunSudokuGongge
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1403458568
 MonoBehaviour:
   m_ObjectHideFlags: 0
