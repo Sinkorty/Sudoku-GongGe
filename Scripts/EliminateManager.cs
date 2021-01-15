@@ -27,16 +27,11 @@ public class EliminateManager : MonoBehaviour
 
     private void Awake()
     {
-        tm = transform.GetChild(0).GetComponent<Tilemap>();
-        for (int y = 1; y < 10; y++)
-        {
-            for (int x = 1; x < 10; x++)
-            {
-                tm.SetColor(new Vector3Int(x, y, 0), Color.red);
-            }
-        }
+        tm = GameObject.Find("Grid/Tilemap").GetComponent<Tilemap>();
+        //添加事件
+        EventCenter.AddListener(EventDefine.Eliminate, Eliminate);
         InstanceGrid();
-        Next();//简化
+        Eliminate();//简化
     }
 
     private void Update()
@@ -231,7 +226,7 @@ public class EliminateManager : MonoBehaviour
                 psb_Nums[ceilPos][i] = false;
     }
 
-    public void Next()
+    public void Eliminate()
     {
         for (int y = 1; y < 10; y++)
             for (int x = 1; x < 10; x++)
