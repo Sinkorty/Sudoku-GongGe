@@ -23,7 +23,7 @@ public class EditGridManager : MonoBehaviour
             Vector3Int cellPos = GetComponent<EliminateManager>().GetCellPos();
             if (cellPos != Vector3Int.zero)//鼠标在格子上
             {
-                int num = GetComponent<EliminateManager>().GetTileNum(cellPos);
+                int num = GetComponent<EliminateManager>().GetCellNum(cellPos);
                 if (num == -1) num = 0;
                 num++;
                 if (num == 10) num = 0;
@@ -37,7 +37,7 @@ public class EditGridManager : MonoBehaviour
             Vector3Int cellPos = GetComponent<EliminateManager>().GetCellPos();
             if (cellPos != Vector3Int.zero)//鼠标在格子上
             {
-                int num = GetComponent<EliminateManager>().GetTileNum(cellPos);
+                int num = GetComponent<EliminateManager>().GetCellNum(cellPos);
                 if (num == -1) num = 0;
                 num += Mathf.CeilToInt(Input.mouseScrollDelta.y);
                 if (num == 10) num = 0;

@@ -6,4 +6,6 @@
     SwitchEliminateMode,    //切换为排除模式
     OpenSourceCode,         //打开Github项目的源代码
     HideFinishEdit,         //隐藏"完成编辑"
+    ReadSudokuFile,         //读取数独文件
+    SaveSudokuFile,         //存储数独文件
 }
