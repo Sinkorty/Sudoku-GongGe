@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Vars Container
   m_EditorClassIdentifier: 
   frontTiles:
+  - {fileID: 11400000, guid: b4a0433cc139c22449b811797f08569e, type: 2}
   - {fileID: 11400000, guid: d48efb1a012af534fa2aafb1c4399408, type: 2}
   - {fileID: 11400000, guid: 26720013d77e53447940bb5812cbb338, type: 2}
   - {fileID: 11400000, guid: e5b08dab5c231c74cbc7512ce362e358, type: 2}

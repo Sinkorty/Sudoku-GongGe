@@ -479,7 +479,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abca7894d060cd24491c4f4f5c7a0d98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  emptyTile: {fileID: 11400000, guid: b4a0433cc139c22449b811797f08569e, type: 2}
 --- !u!1 &454699223
 GameObject:
   m_ObjectHideFlags: 0
@@ -1483,6 +1482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5450ff4d181ac9e4195ac1dd663fd62c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  editFinished: {fileID: 1568949372}
 --- !u!1 &1099570949
 GameObject:
   m_ObjectHideFlags: 0
