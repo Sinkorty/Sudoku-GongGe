@@ -44,23 +44,30 @@ public class EventsRegister : MonoBehaviour
                 bg.GetComponent<SpriteRenderer>().color = new Color(0, 0.7352409f, 1, 1);
             Switching(false);
         });
-        EventCenter.AddListener(EventDefine.ReadSudokuFile, () =>
+        EventCenter.AddListener(EventDefine.ReadSudokuFile, (string fileName) =>
         {
+            EventCenter.Broadcast(EventDefine.ShowLog, "-");
             List<int> nums = new List<int>();
-            foreach (char c in ReadFile(@"C:\Users\admin\Desktop\SudokuData.sd").ToCharArray())   //将文件中的数据转化为全部转化成数字数组
+            string caption;
+            if (Application.isEditor) caption = ReadFile(@"./" + fileName + ".sd");
+            else caption = ReadFile(@"./File Data/" + fileName + ".sd");
+
+            foreach (char c in caption.ToCharArray())   //将文件中的数据转化为全部转化成数字数组
                 nums.Add(int.Parse(c.ToString()));
             int i = 0;
             for (int y = 1; y < 10; y++)
                 for (int x = 1; x < 10; x++, i++)
                     tm.SetTile(new Vector3Int(x, y, 0), VarsManager.GetVars().frontTiles[nums[i]]);
         });
-        EventCenter.AddListener(EventDefine.SaveSudokuFile, () =>
+        EventCenter.AddListener(EventDefine.SaveSudokuFile, (string fileName) =>
         {
+            EventCenter.Broadcast(EventDefine.ShowLog, "-");
             StringBuilder caption = new StringBuilder();
             for (int y = 1; y < 10; y++)
                 for (int x = 1; x < 10; x++)
                     caption.Append(GetCellNum(new Vector3Int(x, y, 0)));
-            WriteFile(@"C:\Users\admin\Desktop\SudokuData.sd", caption.ToString());
+            if (Application.isEditor) WriteFile(@"./" + fileName + ".sd", caption.ToString());
+            else WriteFile(@"./File Data/" + fileName + ".sd", caption.ToString());
         });
         EventCenter.AddListener(EventDefine.ShowLog, (string caption) =>
         {
@@ -94,7 +101,8 @@ public class EventsRegister : MonoBehaviour
         }
         catch
         {
-            throw new Exception("文件读取错误");
+            EventCenter.Broadcast(EventDefine.ShowLog, "<color=red>文件读取错误，不存在该文件</color>");
+            throw new Exception("文件读取错误，不存在该文件");
         }
     }
     private void WriteFile(string path, string caption)
@@ -109,7 +117,8 @@ public class EventsRegister : MonoBehaviour
         }
         catch
         {
-            throw new Exception("已有文件名相同的文件");
+            EventCenter.Broadcast(EventDefine.ShowLog, "<color=red>文件存储错误，已有与文件名相同的文件</color>");
+            throw new Exception("文件存储错误，已有与文件名相同的文件");
         }
     }
     private int GetCellNum(Vector3Int cellPos)
