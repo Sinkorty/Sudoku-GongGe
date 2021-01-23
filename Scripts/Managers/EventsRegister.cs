@@ -4,16 +4,22 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class EventsRegister : MonoBehaviour
 {
     Tilemap tm;
+    Text tex_log;
     private void Awake()
     {
         tm = GameObject.Find("Grid/Tilemap").GetComponent<Tilemap>();
+        tex_log = GameObject.Find("Canvas/Tex_Log").GetComponent<Text>();
+        InitEvent();
+    }
+    private void InitEvent()
+    {
         EventCenter.AddListener(EventDefine.ClearGrid, () =>
         {
-            Tilemap tm = GameObject.Find("Grid/Tilemap").GetComponent<Tilemap>();
             //将所有格子改为empty格子
             for (int y = 1; y < 10; y++)
                 for (int x = 1; x < 10; x++)
@@ -55,6 +61,12 @@ public class EventsRegister : MonoBehaviour
                 for (int x = 1; x < 10; x++)
                     caption.Append(GetCellNum(new Vector3Int(x, y, 0)));
             WriteFile(@"C:\Users\admin\Desktop\SudokuData.sd", caption.ToString());
+        });
+        EventCenter.AddListener(EventDefine.ShowLog, (string caption) =>
+        {
+            tex_log.text += caption;
+            if (caption == "-")//"-"为假字符
+                tex_log.text = string.Empty;
         });
     }
     private void Switching(bool isEdit)

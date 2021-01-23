@@ -76,6 +76,7 @@ public class EditGridManager : MonoBehaviour
     /// <returns> 如果编辑错误，返回false </returns>
     private bool JudgeCell(Vector3Int cellPos)
     {
+        EventCenter.Broadcast(EventDefine.ShowLog, "-");
         if (GetTileNum(cellPos) == -1)
             return true;
         int num = GetTileNum(cellPos);
@@ -83,14 +84,16 @@ public class EditGridManager : MonoBehaviour
         for (int x = 1; x < 10; x++)
             if (x != cellPos.x && GetTileNum(new Vector3Int(x, cellPos.y, 0)) == num)
             {
-                //print("Edit error with line,CellPos:" + cellPos);
+                EventCenter.Broadcast(EventDefine.ShowLog, string.Format("<color=red>{0}<b> 行 </b>编辑错误\n该坐标的数字{1}与{2}的数字重复</color>",
+                    (Vector2Int)cellPos, num, new Vector2Int(x, cellPos.y)));
                 return false;
             }
         //从列判断
         for (int y = 1; y < 10; y++)
             if (y != cellPos.y && GetTileNum(new Vector3Int(cellPos.x, y, 0)) == num)
             {
-                //print("Edit error with list,CellPos:" + cellPos);
+                EventCenter.Broadcast(EventDefine.ShowLog, string.Format("<color=red>{0}<b> 行 </b>编辑错误\n该坐标的数字{1}与{2}的数字重复</color>",
+                    (Vector2Int)cellPos, num, new Vector2Int(cellPos.x, y)));
                 return false;
             }
         //从宫判断
@@ -99,15 +102,16 @@ public class EditGridManager : MonoBehaviour
         {
             if (centrolPos + dire != cellPos && GetTileNum(centrolPos + dire) == num)
             {
-                //print("Edit error with Gong,CellPos:" + cellPos);
+                EventCenter.Broadcast(EventDefine.ShowLog, string.Format("<color=red>{0}<b> 行 </b>编辑错误\n该坐标的数字{1}与{2}的数字重复</color>",
+                    (Vector2Int)cellPos, num, (Vector2Int)centrolPos + (Vector2Int)dire));
                 return false;
             }
         }
         return true;
     }
-    private int GetTileNum(Vector3Int ceilPos)
+    private int GetTileNum(Vector3Int cellPos)
     {
-        string gridName = tm.GetTile(ceilPos).name;//通过坐标获取格子的名称
+        string gridName = tm.GetTile(cellPos).name;//通过坐标获取格子的名称
         if (gridName != "empty")//当前格子不是空格子
             return int.Parse(gridName);//返回格子所带有的数字
         else

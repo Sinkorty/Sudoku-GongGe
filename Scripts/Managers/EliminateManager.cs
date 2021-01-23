@@ -34,7 +34,7 @@ public class EliminateManager : MonoBehaviour
     {
         for (int i = 0; i < 9; i++)
             tex_psbNum[i].gameObject.SetActive(false);
-        tex_absNum.text = "";
+        tex_absNum.text = string.Empty;
 
         Vector3Int cellPos = GetCellPos();
         if (cellPos != Vector3Int.zero)//返回的不是假坐标
@@ -190,7 +190,7 @@ public class EliminateManager : MonoBehaviour
     {
         //将绝对数画入Tilemap
         if (abs_Num[cellPos] != -1 && !isFront[cellPos])//目前坐标有绝对数且格子不为手动编辑
-            tm.SetTile(cellPos, baseTiles[abs_Num[cellPos]]);//将对应数字的格子画入对应坐标
+            tm.SetTile(cellPos, baseTiles[abs_Num[cellPos] - 1]);//将对应数字的格子画入对应坐标
     }
 
     /// <summary> 获取鼠标对应格子的坐标 </summary>
@@ -218,10 +218,11 @@ public class EliminateManager : MonoBehaviour
         for (int i = 1; i < 10; i++)
             if (i != value)
                 psb_Nums[cellPos][i] = false;
+        EventCenter.Broadcast(EventDefine.ShowLog, string.Format("{0}已排除，对应数字：{1}\n", (Vector2Int)cellPos, value));
     }
-
-    public void Eliminate()
+    private void Eliminate()
     {
+        EventCenter.Broadcast(EventDefine.ShowLog, "-");//将log清空
         for (int y = 1; y < 10; y++)
             for (int x = 1; x < 10; x++)
             {
